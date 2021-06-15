@@ -39,10 +39,10 @@
   import GoodList from 'components/content/goodlist/GoodList'
 
   import BScroll from 'components/common/bscroll/BScroll'
-  import BackTop from 'components/content/backtop/BackTop'
+  
 
   import {getHomeMultidata, getHomeGoods} from "network/home";
-  import { debounce } from "common/utils.js";
+  import {imgListener, backTopmixin} from "common/mixin.js"
 
   export default {
     name: "Home",
@@ -54,7 +54,7 @@
       TabControl,
       GoodList,
       BScroll,
-      BackTop
+      
     },
     data() {
       return {
@@ -69,9 +69,11 @@
         isShowBack: false,
         tabcontrol: 0,
         isTabShow: false,
-        leaveLocation: 0
+        leaveLocation: 0,
+       
       }
     },
+    mixins: [imgListener, backTopmixin],
     created() {
       // 1.请求多个数据
       this.getHomeMultidata()
@@ -82,21 +84,13 @@
 
       
     },
-    mounted() {
-
-      const refresh = debounce(this.$refs.scroll.refresh, 50)
-      this.$bus.$on('imageLoadFinish', () => {
-        refresh()
-      })
-     
-      // this.imageLoad()
-    },
     activated() {
       this.$refs.scroll.scrTop(0, this.leaveLocation, 0)
       this.$refs.scroll.refresh()
     },
     deactivated() {
       this.leaveLocation = this.$refs.scroll.getScrollPosition()
+      this.$bus.$off('imageLoadFinish',this.itemImgListener)
     },
     computed: {
       goodsName() {
@@ -147,11 +141,12 @@
       },
       // 监听滚动位置
       getPosition(position) {
-        this.isShowBack = (-position.y) > 1000
+        
         // console.log(position)
-
+        this.listenerBackTop(position)
         this.isTabShow = (-position.y) > this.tabcontrol 
       },
+      
       // 监听上拉加载更多
       loadMore() {
         this.getHomeGoods(this.tabname)

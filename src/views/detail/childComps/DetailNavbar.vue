@@ -30,6 +30,8 @@ export default {
   methods: {
     itemClick(index) {
       this.curindex = index
+
+      this.$emit('itemClick', index);
     },
     back() {
       this.$router.back()
