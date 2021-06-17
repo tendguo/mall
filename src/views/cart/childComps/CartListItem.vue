@@ -32,7 +32,8 @@ export default {
       default() {
         return null
       }
-    }
+    },
+    
   },
   methods: {
     isChecked() {

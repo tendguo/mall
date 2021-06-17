@@ -13,6 +13,9 @@
       <good-list ref="recommend" :goods="recommend"></good-list>
       
     </b-scroll>
+    <!-- <div class="message">
+      <div>{{message}}</div>
+    </div> -->
     <back-top @click.native="backClick" v-show="isShowBack"></back-top>
     <detail-bottom-bar @addToCart="addToCart"></detail-bottom-bar>
   </div>
@@ -41,6 +44,7 @@ export default {
   data() {
     return {
       id: null,
+      message: '加入购物车成功',
       topImages: [],
       goods: {},
       shop: {},
@@ -190,4 +194,12 @@ export default {
   .content{
     height: calc(100% - 44px - 58px);
   }
+  /* .message{
+    position: relative;
+    width: 120px;
+    height: 30px;
+    background-color: black;
+
+    z-index: 9999;
+  } */
 </style>
