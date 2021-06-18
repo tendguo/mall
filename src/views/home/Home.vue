@@ -61,9 +61,9 @@
         banners: [],
         recommends: [],
         goods: {
-          'pop': {page: 0, list: []},
-          'new': {page: 0, list: []},
-          'sell': {page: 0, list: []}
+          'pop': {page: 1, list: []},
+          'new': {page: 1, list: []},
+          'sell': {page: 1, list: []}
         },
         tabname: 'pop',
         isShowBack: false,
@@ -107,7 +107,7 @@
         })
       },
       getHomeGoods(type) {
-        const page = this.goods[type].page + 1;
+        const page = this.goods[type].page;
         getHomeGoods(type, page).then(res => {
           // console.log(res)
 

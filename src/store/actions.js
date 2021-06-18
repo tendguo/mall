@@ -8,16 +8,20 @@ export const actions = {
     //     oldProducts = item
     //   }
     // }
-    let oldProducts = context.state.cartList.find(item => item.iid === payload.iid)
+    return new Promise((resolve,reject) => {
+      let oldProducts = context.state.cartList.find(item => item.iid === payload.iid)
 
-    if(oldProducts) {
-      // oldProducts.count += 1
-      context.commit(ADD_COUNTER, oldProducts)
+      if(oldProducts) {
+        // oldProducts.count += 1
+        context.commit(ADD_COUNTER, oldProducts)
+        resolve("添加购物车成功")
 
-    } else {
-      payload.count = 1
-      // state.cartList.push(payload)
-      context.commit(ADD_TO_CART, payload)
-    }
+      } else {
+        payload.count = 1
+        // state.cartList.push(payload)
+        context.commit(ADD_TO_CART, payload)
+        resolve("添加购物车成功")
+      }
+    })
   }
 }

@@ -18,6 +18,7 @@
     </div> -->
     <back-top @click.native="backClick" v-show="isShowBack"></back-top>
     <detail-bottom-bar @addToCart="addToCart"></detail-bottom-bar>
+    <!-- <toast :message="message" :isShow="isshow"></toast> -->
   </div>
 </template>
 
@@ -30,6 +31,7 @@ import DetailGoodsInfo from './childComps/DetailGoodsInfo'
 import DetailParamInfo from './childComps/GoodsParam.vue'
 import DetailComment from './childComps/DetailComment.vue'
 import DetailBottomBar from './childComps/DetailBottomBav.vue'
+// import Toast from 'components/common/toast/Toast'
 
 import GoodList from 'components/content/goodlist/GoodList'
 import BScroll from 'components/common/bscroll/BScroll'
@@ -56,7 +58,9 @@ export default {
       movePositions: [],
       getPosition: null,
       count: 45,
-      currentIndex: null
+      currentIndex: null,
+      // message: '',
+      // isshow: null
       
     }
   },
@@ -70,7 +74,8 @@ export default {
     DetailParamInfo,
     DetailComment,
     GoodList,
-    DetailBottomBar
+    DetailBottomBar,
+    // Toast
     
     
     
@@ -173,7 +178,16 @@ export default {
       product.realPrice = this.goods.realPrice;
       // console.log(product)
       
-      this.$store.dispatch('addCart', product)
+      this.$store.dispatch('addCart', product).then(res => {
+      //   this.isshow = true
+      //   this.message = res
+        // console.log(res)
+      //   setInterval(() => {
+      //     return this.isshow = false
+      //   }, 2000)
+        this.$toast.show(res, 2000)
+        // console.log(this.$toast)
+      })
     }
   }
 }

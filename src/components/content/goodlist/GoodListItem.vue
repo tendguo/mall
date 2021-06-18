@@ -1,7 +1,7 @@
 <template>
   <div class="goods-item"> 
     <div class="goods-info">
-      <img :src="showImg" alt="" @load="imageLoad" @click="goDetail">
+      <img v-lazy="showImg" alt="" @load="imageLoad" @click="goDetail">
       <p>{{goodlist.title}}</p>
       <span class="price">{{goodlist.price}}</span>
       <span class="collect">{{goodlist.cfav}}</span>
